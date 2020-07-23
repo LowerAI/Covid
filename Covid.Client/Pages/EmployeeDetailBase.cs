@@ -1,10 +1,6 @@
-﻿using Covid.Shared.Dtos;
+﻿using Covid.Client.Services;
+using Covid.Shared.Dtos;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Covid.Client.Pages
@@ -16,13 +12,17 @@ namespace Covid.Client.Pages
 
         public EmployeeDto Employee { get; set; } = new EmployeeDto();
 
+        //[Inject]
+        //public HttpClient HttpClient { get; set; }
+
         [Inject]
-        public HttpClient HttpClient { get; set; }
+        public IEmployeeService EmployeeService { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
-            Employee = await HttpClient.GetFromJsonAsync<EmployeeDto>($"api/department/1/employee/{EmployeeId}");
+            //Employee = await HttpClient.GetFromJsonAsync<EmployeeDto>($"api/department/1/employee/{EmployeeId}");
 
+            Employee = await EmployeeService.GetOneForDepartmentAsync(1, int.Parse(EmployeeId));
             await base.OnInitializedAsync();
         }
     }
