@@ -20,6 +20,7 @@ namespace Covid.Client
 
             //builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("http://localhost:7000") });
             builder.Services.AddHttpClient<IEmployeeService, EmployeeService>(client => client.BaseAddress = new Uri("http://localhost:7000"));
+            builder.Services.AddHttpClient<IDepartmentService, DepartmentService>(client => client.BaseAddress = new Uri("http://localhost:7000"));
 
             await builder.Build().RunAsync();
         }

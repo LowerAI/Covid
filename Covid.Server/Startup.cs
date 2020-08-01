@@ -37,7 +37,7 @@ namespace Covid.Server
 
             services.AddCors(options =>
             {// ×¢²á¿çÓò·þÎñ
-                options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader());
+                options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
         }
 

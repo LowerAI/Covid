@@ -50,9 +50,10 @@ namespace Covid.Server.Services
             return employees;
         }
 
-        public async Task<Employee> GetOneAsync(int id)
+        public async Task<Employee> GetOneAsync(int departmentId, int id)
         {
-            var one = await _myContext.Employees.FindAsync(id);
+            //var one = await _myContext.Employees.FindAsync(id);
+            var one = await _myContext.Employees.SingleOrDefaultAsync(x => x.DepartmentId == departmentId && x.Id == id);
             return one;
         }
 

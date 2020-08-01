@@ -43,7 +43,7 @@ namespace Covid.Server.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<EmployeeDto>> GetOneForDepartment(int departmentId, int id)
         {
-            var x = await _employeeRepository.GetOneAsync(id);
+            var x = await _employeeRepository.GetOneAsync(departmentId, id);
             if (x == null)
             {
                 return NotFound();
@@ -104,6 +104,7 @@ namespace Covid.Server.Controllers
             }
             var employeeEnity = new Employee
             {
+                Id = id,
                 DepartmentId = departmentId,
                 Name = employee.Name,
                 BirthDate = employee.BirthDate,
@@ -115,10 +116,10 @@ namespace Covid.Server.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateForDepartment(int departmentId, int id)
+        public async Task<ActionResult> DeleteForDepartment(int departmentId, int id)
         {
             await _employeeRepository.DeleteAsync(id);
             return NoContent();

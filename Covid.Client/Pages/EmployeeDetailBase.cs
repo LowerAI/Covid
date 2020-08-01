@@ -25,5 +25,10 @@ namespace Covid.Client.Pages
             Employee = await EmployeeService.GetOneForDepartmentAsync(1, int.Parse(EmployeeId));
             await base.OnInitializedAsync();
         }
+
+        public void Button_Click()
+        {
+            Employee.Name = "Roberto Baggio";
+        }
     }
 }

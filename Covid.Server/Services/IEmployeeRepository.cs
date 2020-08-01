@@ -9,7 +9,7 @@ namespace Covid.Server.Services
     public interface IEmployeeRepository
     {
         Task<IList<Employee>> GetForDepartmentAsync(int departmentId);
-        Task<Employee> GetOneAsync(int id);
+        Task<Employee> GetOneAsync(int departmentId, int id);
         Task<Employee> AddAsync(Employee employee);
         Task UpdateAsync(Employee employee);
         Task DeleteAsync(int id);
