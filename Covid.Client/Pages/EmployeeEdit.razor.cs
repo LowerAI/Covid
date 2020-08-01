@@ -75,9 +75,10 @@ namespace Covid.Client.Pages
             }
         }
 
-        protected async Task HandleInvalidSubmit()
+        protected void HandleInvalidSubmit()
         {
-
+            CssClass = "alert alert-danger";
+            Message = "表单验证失败";
         }
 
         protected async Task DeleteEmployee()
