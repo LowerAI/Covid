@@ -1,6 +1,7 @@
 ﻿using Covid.Client.Services;
 using Covid.Shared.Dtos;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,10 +12,11 @@ namespace Covid.Client.Pages
         //[Inject]
         //public HttpClient HttpClient { get; set; }
 
-        [Inject]
-        public IEmployeeService EmployeeService { get; set; }
+        [Inject] public IEmployeeService EmployeeService { get; set; }
+        [Inject] public IJSRuntime JsRuntime { get; set; }
 
         public IEnumerable<EmployeeDto> Employees { get; set; } = new List<EmployeeDto>();
+        public string Result { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
@@ -22,6 +24,11 @@ namespace Covid.Client.Pages
 
             Employees = await EmployeeService.GetForDepartmentAsync(1);
             await base.OnInitializedAsync();
+        }
+
+        protected async Task SayHello()
+        {
+            Result = await JsRuntime.InvokeAsync<string>("SayHello", "Mike");
         }
     }
 }
